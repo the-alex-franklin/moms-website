@@ -1,0 +1,8 @@
+/* This file isn't actually needed for the Deno runtime to run
+   but Vite is looking for it and crashing when it doesn't find it */
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
+  }
+}
