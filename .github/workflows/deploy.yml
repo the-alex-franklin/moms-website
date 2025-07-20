@@ -30,7 +30,6 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "moms-website"
-          entrypoint: "server.ts"
           root: "dist"
           
           
