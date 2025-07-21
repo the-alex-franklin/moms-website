@@ -19,8 +19,8 @@ const { css } = await uno.generate(appHtml, { preflights: false });
 
 // 4. Inject HTML and CSS into template
 const finalHtml = template
-  .replace("{{APP}}", appHtml)
-  .replace("{{CSS}}", `<style>${css}</style>`);
+  .replace("<!--APP-->", appHtml)
+  .replace("<!--CSS-->", `<style>${css}</style>`);
 
 // 5. Write to dist/index.html
 const outputPath = join("dist", "index.html");

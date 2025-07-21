@@ -44,7 +44,6 @@ export default function App() {
         >
           <img
             src="https://picsum.photos/1600/800?random=10"
-            alt="Welcome to WHIM Therapy"
             className="absolute inset-0 w-full h-full object-cover opacity-40"
           />
           <div className="relative z-10 max-w-3xl text-[#3b2e24] space-y-6">
