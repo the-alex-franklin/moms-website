@@ -1,10 +1,14 @@
-import { Hono } from "hono";
-import { serveStatic } from "npm:@hono/node-server/serve-static";
+import { serveStatic } from "jsr:@hono/hono/deno";
+import { Hono } from "jsr:@hono/hono";
 
 const app = new Hono();
 
-app.get("/*", serveStatic({ root: "dist" }));
+app.use(
+  "/*",
+  serveStatic({
+    root: "./dist",
+    rewriteRequestPath: (path) => path === "/" ? "/index.html" : path,
+  }),
+);
 
-Deno.serve({
-  handler: app.fetch,
-});
+Deno.serve(app.fetch);

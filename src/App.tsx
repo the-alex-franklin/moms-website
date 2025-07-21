@@ -4,14 +4,23 @@ export default function App() {
   const navItems = ["home", "about", "services", "gallery", "contact"];
 
   useEffect(() => {
-    document.querySelectorAll("a[href^='#']").forEach((anchor) => {
-      anchor.addEventListener("click", (e) => {
-        e.preventDefault();
-        const href = (e.currentTarget as HTMLAnchorElement).getAttribute("href");
-        const target = document.querySelector(href!);
-        target?.scrollIntoView({ behavior: "smooth" });
-      });
-    });
+    const anchors = document.querySelectorAll("a[href^='#']");
+    const handler = (e: Event) => {
+      e.preventDefault();
+      const href = (e.currentTarget as HTMLAnchorElement).getAttribute("href");
+      if (!href) return;
+
+      const target = document.querySelector(href);
+      if (!target) return;
+
+      target.scrollIntoView({ behavior: "smooth" });
+    };
+
+    anchors.forEach((anchor) => anchor.addEventListener("click", handler));
+
+    return () => {
+      anchors.forEach((anchor) => anchor.removeEventListener("click", handler));
+    };
   }, []);
 
   return (
@@ -45,7 +54,10 @@ export default function App() {
             <p className="text-2xl leading-relaxed">
               Personalized physical therapy to help you move, heal, and thrive.
             </p>
-            <button className="bg-[#a58c6f] text-white px-6 py-3 rounded-full text-lg hover:brightness-110 transition">
+            <button
+              type="button"
+              className="bg-[#a58c6f] text-white px-6 py-3 rounded-full text-lg hover:brightness-110 transition"
+            >
               Book a Session
             </button>
           </div>
