@@ -5,7 +5,7 @@
     "build:server": "deno run -A --node-modules-dir npm:vite build --ssr src/entry-server.tsx",
     "ssg": "deno run -A ssg.ts",
     "build": "deno task build:client && deno task build:server && deno task ssg",
-    "serve": "deno task build && deno run -A server.ts"
+    "serve": "deno run -A server.ts"
   },
   "nodeModulesDir": "auto",
   "compilerOptions": {

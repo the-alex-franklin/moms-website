@@ -1,5 +1,5 @@
-import { serveStatic } from "jsr:@hono/hono/deno";
 import { Hono } from "jsr:@hono/hono";
+import { serveStatic } from "jsr:@hono/hono/deno";
 
 const app = new Hono();
 

@@ -1,31 +1,24 @@
-// ssg.ts
-import { render } from "./dist/entry-server.mjs"; // Vite build output
-// import unoConfig from "./uno.config.ts";
-import { ensureDir } from "https://deno.land/std@0.224.0/fs/mod.ts";
-import { join } from "node:path";
+import { render } from "./dist/entry-server.mjs";
 import { createGenerator, presetAttributify, presetWind4 } from "unocss";
+import chalk from "npm:chalk";
 
-const uno = await createGenerator({ presets: [presetWind4(), presetAttributify()] });
+const start = performance.now();
 
-// 1. Load template
 const templatePath = "./dist/index.html";
 const template = await Deno.readTextFile(templatePath);
 
-// 2. Run React SSR
 const appHtml = render();
 
-// 3. Run UnoCSS on the HTML
+const uno = await createGenerator({ presets: [presetWind4(), presetAttributify()] });
 const { css } = await uno.generate(appHtml, { preflights: false });
 
-// 4. Inject HTML and CSS into template
 const finalHtml = template
   .replace("<!--APP-->", appHtml)
   .replace("<!--CSS-->", `<style>${css}</style>`);
 
-// 5. Write to dist/index.html
-const outputPath = join("dist", "index.html");
-await ensureDir("dist");
-await Deno.writeTextFile(outputPath, finalHtml);
+await Deno.writeTextFile(templatePath, finalHtml);
 
-console.log("✅ SSG build complete: dist/index.html");
+const end = performance.now();
+
+console.log(chalk.green(`✅ SSG built in ${end - start}ms`));
 Deno.exit(0);

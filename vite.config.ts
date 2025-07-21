@@ -11,10 +11,6 @@ export default defineConfig(() => ({
     UnoCSS({ presets: [presetWind4(), presetAttributify()] }),
   ],
   build: {
-    //   outDir: isSsrBuild ? "dist/server" : "dist",
-    emptyOutDir: false, // prevent wiping dist/server when building client
-    //   rollupOptions: {
-    //     input: isSsrBuild ? "src/entry-server.tsx" : "index.html",
-    //   },
+    emptyOutDir: false,
   },
 }));
